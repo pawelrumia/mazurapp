@@ -1,9 +1,9 @@
 package furthertrainingapp.student;
 
 public class Adres {
-    public String miasto;
-    public String ulica;
-    public String numerDomu;
+    private String miasto;
+    private String ulica;
+    private String numerDomu;
 
     public Adres(String miasto, String ulica, String numerDomu) {
         this.miasto = miasto;

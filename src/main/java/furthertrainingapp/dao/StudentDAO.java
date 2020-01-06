@@ -12,7 +12,6 @@ import java.util.Map;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Repository
-@Qualifier(value = "fakeData")
 public class StudentDAO {
     private static Map<Integer, Student> students;
 
@@ -26,17 +25,6 @@ public class StudentDAO {
             }
         };
     }
-
-//    static {
-//        students = new HashMap<Integer, Student>() {
-//            {
-//                put(1, new Student(1, "Pawel", "JAVA"));
-//                put(2, new Student(2, "Jasio", "Baja", new Adres("Nowy staw", "Konopnickiej", "12")));
-//                put(3, new Student(3, "Patryszka", "Sql", new Adres("Terespol", "Blotkow", "1")));
-//                put(4, new Student(4, "Werner", "dotnet", new Adres("Janowek", "Nowodworska", "21")));
-//            }
-//        };
-//    }
 
     public Collection<Student> getAllStudents() {
         return students.values();
