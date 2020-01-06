@@ -1,9 +1,8 @@
-package furthertrainingapp.dao;
+package com.example.mazur.p.mazurapp.furthertrainingapp.dao;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import furthertrainingapp.student.Adres;
-import furthertrainingapp.student.Student;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.example.mazur.p.mazurapp.furthertrainingapp.student.Adres;
+import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -14,6 +13,17 @@ import java.util.Map;
 @Repository
 public class StudentDAO {
     private static Map<Integer, Student> students;
+
+//    static {
+//        students = new HashMap<Integer, Student>() {
+//            {
+//                put(1, new Student(1, "Pawel", "java"));
+//                put(2, new Student(2, "Jasio", "Baja"));
+//                put(3, new Student(3, "Kulfon", "Monika"));
+//                put(4, new Student(4, "Werner", "dotnet"))));
+//            }
+//        };
+//    }
 
     static {
         students = new HashMap<Integer, Student>() {

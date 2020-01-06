@@ -1,4 +1,4 @@
-package furthertrainingapp.student;
+package com.example.mazur.p.mazurapp.furthertrainingapp.student;
 
 public class Student {
     private int id;

@@ -1,16 +1,13 @@
-package furthertrainingapp.controller;
+package com.example.mazur.p.mazurapp.furthertrainingapp.controller;
 
-import furthertrainingapp.exceptionshandle.ProductNotFoundException;
-import furthertrainingapp.service.StudentService;
-import furthertrainingapp.student.Student;
+import com.example.mazur.p.mazurapp.furthertrainingapp.exceptionshandle.ProductNotFoundException;
+import com.example.mazur.p.mazurapp.furthertrainingapp.service.StudentService;
+import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.Id;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/students")

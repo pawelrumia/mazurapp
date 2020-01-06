@@ -1,4 +1,4 @@
-package furthertrainingapp.interceptor;
+package com.example.mazur.p.mazurapp.furthertrainingapp.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

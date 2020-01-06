@@ -1,4 +1,4 @@
-package furthertrainingapp.exceptionshandle;
+package com.example.mazur.p.mazurapp.furthertrainingapp.exceptionshandle;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

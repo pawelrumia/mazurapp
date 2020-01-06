@@ -1,4 +1,4 @@
-package furthertrainingapp;
+package com.example.mazur.p.mazurapp.furthertrainingapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

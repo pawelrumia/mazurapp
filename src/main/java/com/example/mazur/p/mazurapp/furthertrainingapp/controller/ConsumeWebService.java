@@ -1,4 +1,4 @@
-package furthertrainingapp.controller;
+package com.example.mazur.p.mazurapp.furthertrainingapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
