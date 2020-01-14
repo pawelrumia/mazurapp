@@ -11,6 +11,9 @@ public class Adres {
         this.numerDomu = numerDomu;
     }
 
+    public Adres() {
+    }
+
     public String getMiasto() {
         return miasto;
     }

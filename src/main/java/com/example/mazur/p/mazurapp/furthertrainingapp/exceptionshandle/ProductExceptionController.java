@@ -10,6 +10,6 @@ public class ProductExceptionController {
 
     @ExceptionHandler(value = ProductNotFoundException.class)
         public ResponseEntity<Object> exception(ProductNotFoundException exception){
-            return new ResponseEntity<>("Product not found dziadu", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
     }

@@ -5,12 +5,16 @@ public class Student {
     private String name;
     private String course;
     private Adres adres;
+    private Wyksztalcenie wyksztalcenie;
 
-    public Student(int id, String name, String course, Adres adres) {
+    public Student(int id, String name, String course, Adres adres, Wyksztalcenie wyksztalcenie) {
         this.id = id;
         this.name = name;
         this.course = course;
         this.adres = new Adres(adres.getMiasto(), adres.getUlica(), adres.getNumerDomu());
+        this.wyksztalcenie =
+                new Wyksztalcenie(wyksztalcenie.getNazwaSzkoly(),
+                        wyksztalcenie.getKierunek(), wyksztalcenie.getRokUkonczenia());
     }
 
     public Student() {
@@ -42,5 +46,9 @@ public class Student {
 
     public Adres getAdres() {
         return adres;
+    }
+
+    public Wyksztalcenie getWyksztalcenie() {
+        return wyksztalcenie;
     }
 }
