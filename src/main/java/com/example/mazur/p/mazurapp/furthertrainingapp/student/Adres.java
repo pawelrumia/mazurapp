@@ -1,40 +1,22 @@
 package com.example.mazur.p.mazurapp.furthertrainingapp.student;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Adres {
-    private String miasto;
-    private String ulica;
-    private String numerDomu;
+    @JsonProperty("city")
+    private String city;
+    @JsonProperty("street")
+    private String street;
+    @JsonProperty("number")
+    private int number;
 
-    public Adres(String miasto, String ulica, String numerDomu) {
-        this.miasto = miasto;
-        this.ulica = ulica;
-        this.numerDomu = numerDomu;
-    }
-
-    public Adres() {
-    }
-
-    public String getMiasto() {
-        return miasto;
-    }
-
-    public void setMiasto(String miasto) {
-        this.miasto = miasto;
-    }
-
-    public String getUlica() {
-        return ulica;
-    }
-
-    public void setUlica(String ulica) {
-        this.ulica = ulica;
-    }
-
-    public String getNumerDomu() {
-        return numerDomu;
-    }
-
-    public void setNumerDomu(String numerDomu) {
-        this.numerDomu = numerDomu;
-    }
+    public Adres withCity(String city) {this.city=city; return this;}
+    public Adres withStreet(String street) {this.street=street; return this;}
+    public Adres withHomeNumber(int homeNumber) {this.number=homeNumber; return this;}
 }

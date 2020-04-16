@@ -52,6 +52,6 @@ public class StudentController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertStudent(@RequestBody Student student) {
         studentService.insertStudent(student);
-        System.out.println("Bang!");
+        System.out.println("Great success!");
     }
 }

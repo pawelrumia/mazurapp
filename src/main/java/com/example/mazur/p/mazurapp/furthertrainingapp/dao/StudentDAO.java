@@ -5,6 +5,7 @@ import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -12,16 +13,16 @@ import java.util.Map;
 public class StudentDAO {
     private static Map<Integer, Student> students;
 
-//    static {
-//        students = new HashMap<Integer, Student>() {
-//            {
-//                put(1, new Student(1, "Pawel", "java", new Adres("Krakow", "Nowa", "4"), new Wyksztalcenie("UW", "Matma", 1999)));
+    static {
+        students = new HashMap<Integer, Student>() {
+            {
+//                put(1, new Student(1, "Pawel", "java", new Adres("Krakow", "Nowa", "4"), new Education("UW", "Matma", 1999)));
 //                put(2, new Student(2, "Jasio", "Baja", new Adres("Poznan", "Poznanska", "12")));
 //                put(3, new Student(3, "Kulfon", "Monika", new Adres("Krakow", "Krakowska", "1")));
 //                put(4, new Student(4, "Werner", "dotnet", new Adres("Warszawa", "Warszawska", "21")));
-//            }
-//        };
-//    }
+            }
+        };
+    }
 
     public Collection<Student> getAllStudents() {
         return students.values();
@@ -35,16 +36,18 @@ public class StudentDAO {
         students.remove(id);
     }
 
+
     public void updateStudent(Student student) {
         Student stud = students.get(student.getId());
+        stud.setId(student.getId());
         stud.setName(student.getName());
         stud.setCourse(student.getCourse());
-        stud.getAdres().setMiasto(student.getAdres().getMiasto());
-        stud.getAdres().setUlica(student.getAdres().getUlica());
-        stud.getAdres().setNumerDomu(student.getAdres().getNumerDomu());
-        stud.getWyksztalcenie().setNazwaSzkoly(student.getWyksztalcenie().getNazwaSzkoly());
-        stud.getWyksztalcenie().setKierunek(student.getWyksztalcenie().getKierunek());
-        stud.getWyksztalcenie().setRokUkonczenia(student.getWyksztalcenie().getRokUkonczenia());
+        stud.getAdres().setCity(student.getAdres().getCity());
+        stud.getAdres().setStreet(student.getAdres().getStreet());
+        stud.getAdres().setNumber(student.getAdres().getNumber());
+        stud.getEducation().setSchool(student.getEducation().getSchool());
+        stud.getEducation().setSpecialization(student.getEducation().getSpecialization());
+        stud.getEducation().setGraduationYear(student.getEducation().getGraduationYear());
         students.put(student.getId(), student);
     }
 
@@ -52,12 +55,12 @@ public class StudentDAO {
         Student stud = students.get(id);
         stud.setName(student.getName());
         stud.setCourse(student.getCourse());
-        stud.getAdres().setMiasto(student.getAdres().getMiasto());
-        stud.getAdres().setUlica(student.getAdres().getUlica());
-        stud.getAdres().setNumerDomu(student.getAdres().getNumerDomu());
-        stud.getWyksztalcenie().setNazwaSzkoly(student.getWyksztalcenie().getNazwaSzkoly());
-        stud.getWyksztalcenie().setKierunek(student.getWyksztalcenie().getKierunek());
-        stud.getWyksztalcenie().setRokUkonczenia(student.getWyksztalcenie().getRokUkonczenia());
+        stud.getAdres().setCity(student.getAdres().getCity());
+        stud.getAdres().setStreet(student.getAdres().getStreet());
+        stud.getAdres().setNumber(student.getAdres().getNumber());
+        stud.getEducation().setSchool(student.getEducation().getSchool());
+        stud.getEducation().setSpecialization(student.getEducation().getSpecialization());
+        stud.getEducation().setGraduationYear(student.getEducation().getGraduationYear());
         students.put(student.getId(), student);
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestyTestNG" thread-count="1" parallel="tests" verbose="1">
+    <!--<listeners>-->
+    <!--<listener class-name="tests.testyTestNG.Listeners"/>-->
+    <!--</listeners>-->
+    <test name="ApiTests">
+        <!--<groups>-->
+        <!--<run>-->
+        <!--<include name="raz"/>-->
+        <!--</run>-->
+        <!--</groups>-->
+        <classes>
+            <class name="api.TestClass"/>
+        </classes>
+    </test>
+</suite>
