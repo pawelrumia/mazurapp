@@ -64,7 +64,7 @@ public class Requests {
     Student sendRequest() {
         Student student = new Student();
         return student
-                .withId(73)
+                .withId(50)
                 .withName("Jozek")
                 .withCourse("Golenie")
                 .withAdres(new Adres()
@@ -73,9 +73,8 @@ public class Requests {
                         .withHomeNumber(29))
                 .withEducation(new Education()
                         .withSchool("Szkola Kebaba")
-                        .withSpecialization("kebab")
-                        .withGraduation(1988))
-                ;
+                        .withSpecialization("sobota wieczor")
+                        .withGraduation(1988));
     }
 
     static Student model1() {
@@ -83,8 +82,8 @@ public class Requests {
                 .id(2)
                 .name("Zioooome")
                 .course("Trener")
-                .adres(new Adres("Rumia", "Nie powiem bydlaki", 16))
-                .education(new Education("Najgorsza", "Lamacz kosci", 2000))
+                .adres(new Adres("Rumia", "Nie powiem", 16))
+                .education(new Education("Najgorsza", "Trener", 2000))
                 .build();
     }
 }

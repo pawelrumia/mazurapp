@@ -30,18 +30,34 @@ public class Student {
                         education.getSpecialization(), education.getGraduationYear());
     }
 
-    public Adres getAdres() {
-        return adres;
+    public Student withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    public Education getEducation() {
-        return education;
+    public Student withName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public Student withId(int id) {this.id=id; return this;}
-    public Student withName(String name) {this.name=name; return this;}
-    public Student withCourse(String course) {this.course=course; return this;}
-    public Student withAdres(Adres adres) {this.adres=adres; return this;}
-    public Student withEducation(Education education) {this.education=education; return this;}
+    public Student withCourse(String course) {
+        this.course = course;
+        return this;
+    }
 
+    public Student withAdres(Adres adres) {
+        this.adres = adres;
+        return this;
+    }
+
+    public Student withEducation(Education education) {
+        this.education = education;
+        return this;
+    }
+
+    public Student withBody(Student student) {
+        return new Student(student.getId(), student.getName(), student.getCourse(),
+                new Adres(student.getAdres().getCity(), student.getAdres().getStreet(), student.getAdres().getNumber()),
+                new Education(student.getEducation().getSchool(), student.getEducation().getSpecialization(), student.getEducation().getGraduationYear()));
+    }
 }

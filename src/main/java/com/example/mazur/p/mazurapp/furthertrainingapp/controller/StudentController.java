@@ -16,11 +16,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public Collection<Student> getAllStudents(){
-//        return studentService.getAllStudents();
-//    }
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object> getAllStudents() {
         return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);

@@ -7,7 +7,7 @@
     <test name="ApiTests">
         <!--<groups>-->
         <!--<run>-->
-        <!--<include name="raz"/>-->
+        <!--<include name="newGets"/>-->
         <!--</run>-->
         <!--</groups>-->
         <classes>

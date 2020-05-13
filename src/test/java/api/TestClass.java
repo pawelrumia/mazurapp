@@ -13,13 +13,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 import static api.Requests.*;
+import static api.StudentRequest.createRequest;
 import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonWriter.objectToJson;
 import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.RequestLogger.logged;
 import static io.restassured.RestAssured.given;
@@ -28,10 +28,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TestClass {
-    PropertyReader PR = new PropertyReader();
+    private PropertyReader PR = new PropertyReader();
     private JsonPath jsonPath;
-    Requests request = new Requests();
-    ObjectMapper objectMapper = new ObjectMapper();
+    private Requests request = new Requests();
+    private ObjectMapper objectMapper = new ObjectMapper();
+    private Client client = new Client();
 
     @Test
     public void getSingleEmployee() throws IOException {
@@ -110,6 +111,7 @@ public class TestClass {
                                      String school, String spec,
                                      int yearOfG) throws IOException {
         RequestSpecification requestSpec = new RequestSpecBuilder()
+                .setContentType(JSON)
                 .setBaseUri(PR.readProperty("baseUri"))
                 .setBasePath(PR.readProperty("getStudentPath"))
                 .addPathParam("id", 76)
@@ -148,7 +150,7 @@ public class TestClass {
 
     @Test
     public void testWithGeneralJacksonAnnotations() throws IOException {
-        Student student = new Student( 5, "","Ziomal",new Adres("Terespol", "Nowa", 4), new Education("", "", 2000));
+        Student student = new Student(5, "", "Ziomal", new Adres("Terespol", "Nowa", 4), new Education("", "", 2000));
         String result = objectMapper.writeValueAsString(student);
         System.out.println(result);
         assertThat(result.contains("Terespol")).isTrue();
@@ -167,6 +169,21 @@ public class TestClass {
         new AssertStudent().statusCodeIsOk(response.getStatusCode());
     }
 
+    @Test
+    public void buildRequest() throws IOException {
+        client.post(PR.readProperty("baseUriForPost"),
+                objectToJson(request.sendRequest()));
+    }
+
+    @Test(groups = "newGets")
+    public void getAllStudentsNewWay() throws IOException {
+        client.getAllStudents(PR.readProperty("baseUriForPost"));
+    }
+
+    @Test(groups = "newGets")
+    public void getStudentByIdNewWay() throws IOException {
+        client.getStudentById(PR.readProperty("baseUri"), 50);
+    }
     //    @AfterTest
     @Test
     public void deleteAll() throws IOException {
@@ -183,7 +200,7 @@ public class TestClass {
         }
     }
 
-    @Test(priority = 0, description = "Sending requests before")
+    @Test(description = "Sending requests before")
     public void sendRequests() {
         RestAssured.baseURI = "http://localhost:8000";
         given().contentType(JSON)
@@ -209,5 +226,12 @@ public class TestClass {
                 .body(objectToJson(request.sendRequest()))
                 .post("/students")
                 .then().statusCode(200);
+    }
+
+    @Test
+    public void fullModel() {
+        createRequest(new Student(76, "kas", "asf",
+                new Adres("asf", "asf",  16),
+                new Education("asfasf", "asgjk", 1799)));
     }
 }
