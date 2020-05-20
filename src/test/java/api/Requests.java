@@ -3,13 +3,9 @@ package api;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Adres;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Education;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
-import com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonWriter;
 
-import java.util.function.Supplier;
+class Requests {
 
-public class Requests {
-    private Student studentModel = new Student();
-    public JsonWriter jsonWriter = new JsonWriter();
     static String request1 =
             "{\n" +
                     "        \"id\": 15,\n" +
@@ -86,4 +82,18 @@ public class Requests {
                 .education(new Education("Najgorsza", "Trener", 2000))
                 .build();
     }
+
+    final static Student baseRequest =
+            new Student()
+                    .withId(100)
+                    .withName("Jozek")
+                    .withCourse("Golenie")
+                    .withAdres(new Adres()
+                            .withCity("Biala Podlaska")
+                            .withStreet("Zachlapana")
+                            .withHomeNumber(29))
+                    .withEducation(new Education()
+                            .withSchool("Szkola Kebaba")
+                            .withSpecialization("sobota wieczor")
+                            .withGraduation(1988));
 }

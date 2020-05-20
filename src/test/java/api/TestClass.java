@@ -234,4 +234,16 @@ public class TestClass {
                 new Adres("asf", "asf",  16),
                 new Education("asfasf", "asgjk", 1799)));
     }
+
+    @Test
+    public void sendBaseStudentRequest() throws IOException {
+       client.post(PR.readProperty("baseUriForPost"),
+               objectToJson(baseRequest));
+    }
+
+    @Test
+    public void sendBaseStudentRequestWithModification() throws IOException {
+        client.post(PR.readProperty("baseUriForPost"),
+                objectToJson(baseRequest));
+    }
 }
