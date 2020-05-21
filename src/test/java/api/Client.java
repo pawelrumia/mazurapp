@@ -1,5 +1,7 @@
 package api;
 
+import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
+import com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonMapper;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -18,6 +20,7 @@ public class Client {
             LoggerFactory.getLogger(TestClass.class);
     private static final Header HEADER_CONTENT_TYPE =
             new Header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
+    private JsonMapper jsonMapper = new JsonMapper();
 
     Response post(String address, String requestBody) {
         Response response = buildPostRequest(requestBody, address).post();
@@ -31,9 +34,17 @@ public class Client {
         return response;
     }
 
+    Student getAllStudentsKopia(String address) {
+        Response res = buildGetRequest(address).get();
+        String response = res.getBody().asString();
+
+        System.out.println(response);
+        return jsonMapper.jsonToObject(response, Student.class);
+    }
+
     Response getStudentById(String address, int id) throws IOException {
         Response response = buildGetRequestByID(address, id).get();
-        logRequestAndResponseInfo("GET", address, null, response);
+//        logRequestAndResponseInfo("GET", address, null, response);
         return response;
     }
 

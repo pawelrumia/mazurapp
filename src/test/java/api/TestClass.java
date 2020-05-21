@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import static api.Requests.*;
 import static api.StudentRequest.createRequest;
-import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonWriter.objectToJson;
+import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonMapper.objectToJson;
 import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.RequestLogger.logged;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -245,5 +245,18 @@ public class TestClass {
     public void sendBaseStudentRequestWithModification() throws IOException {
         client.post(PR.readProperty("baseUriForPost"),
                 objectToJson(baseRequest));
+    }
+
+    @Test
+    public void sendBaseStudentRequestWithList() throws IOException {
+        client.post(PR.readProperty("baseUriForPost"),
+                objectToJson(baseRequestWithList));
+    }
+
+    @Test
+    public void getStudentByIdNewWayWithList() throws IOException {
+        Student student = client.getAllStudentsKopia(PR.readProperty("getAllStudents"));
+
+        System.out.println(student.getId());
     }
 }

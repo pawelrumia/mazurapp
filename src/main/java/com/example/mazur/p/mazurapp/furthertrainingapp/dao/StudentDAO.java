@@ -16,10 +16,6 @@ public class StudentDAO {
     static {
         students = new HashMap<Integer, Student>() {
             {
-//                put(1, new Student(1, "Pawel", "java", new Adres("Krakow", "Nowa", "4"), new Education("UW", "Matma", 1999)));
-//                put(2, new Student(2, "Jasio", "Baja", new Adres("Poznan", "Poznanska", "12")));
-//                put(3, new Student(3, "Kulfon", "Monika", new Adres("Krakow", "Krakowska", "1")));
-//                put(4, new Student(4, "Werner", "dotnet", new Adres("Warszawa", "Warszawska", "21")));
             }
         };
     }

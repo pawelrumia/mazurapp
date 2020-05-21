@@ -1,12 +1,14 @@
 package com.example.mazur.p.mazurapp.furthertrainingapp.student;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Student {
     @JsonProperty("id")
@@ -19,6 +21,8 @@ public class Student {
     private Adres adres;
     @JsonProperty("education")
     private Education education;
+    @JsonProperty("skills")
+    private Skills skills;
 
     public Student(int id, String name, String course, Adres adres, Education education) {
         this.id = id;
@@ -28,6 +32,7 @@ public class Student {
         this.education =
                 new Education(education.getSchool(),
                         education.getSpecialization(), education.getGraduationYear());
+        this.skills = new Skills();
     }
 
     public Student withId(int id) {
@@ -55,9 +60,8 @@ public class Student {
         return this;
     }
 
-    public Student withBody(Student student) {
-        return new Student(student.getId(), student.getName(), student.getCourse(),
-                new Adres(student.getAdres().getCity(), student.getAdres().getStreet(), student.getAdres().getNumber()),
-                new Education(student.getEducation().getSchool(), student.getEducation().getSpecialization(), student.getEducation().getGraduationYear()));
+    public Student withSkills(Skills skills) {
+        this.skills = skills;
+        return this;
     }
 }
