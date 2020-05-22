@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/students")
@@ -38,7 +42,7 @@ public class StudentController {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public void updateStudenta(@PathVariable("id") int id, @RequestBody Student student) {
-        if(id <= 0){
+        if (id <= 0) {
             throw new ProductNotFoundException();
         }
         studentService.updateStudentById(id, student);

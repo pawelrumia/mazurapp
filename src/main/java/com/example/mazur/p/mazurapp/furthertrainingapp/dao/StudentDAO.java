@@ -1,58 +1,46 @@
 package com.example.mazur.p.mazurapp.furthertrainingapp.dao;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
+import com.example.mazur.p.mazurapp.furthertrainingapp.student.University;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Repository
 public class StudentDAO {
-    private static Map<Integer, Student> students;
+    private static final Map<Integer, Student> STUDENTS = new HashMap<>();
 
-    static {
-        students = new HashMap<Integer, Student>() {
-            {
-//                put(1, new Student(1, "Pawel", "java", new Adres("Krakow", "Nowa", "4"), new Education("UW", "Matma", 1999)));
-//                put(2, new Student(2, "Jasio", "Baja", new Adres("Poznan", "Poznanska", "12")));
-//                put(3, new Student(3, "Kulfon", "Monika", new Adres("Krakow", "Krakowska", "1")));
-//                put(4, new Student(4, "Werner", "dotnet", new Adres("Warszawa", "Warszawska", "21")));
-            }
-        };
-    }
-
-    public Collection<Student> getAllStudents() {
-        return students.values();
+    public University getAllStudents() {
+        return new University()
+                .withStudents(new ArrayList<>(STUDENTS.values()));
     }
 
     public Student getStudentById(int id) {
-        return students.get(id);
+        return STUDENTS.get(id);
     }
 
     public void removeStudentById(int id) {
-        students.remove(id);
+        STUDENTS.remove(id);
     }
 
-
     public void updateStudent(Student student) {
-        Student stud = students.get(student.getId());
+        Student stud = STUDENTS.get(student.getId());
         stud.setId(student.getId());
-        stud.setName(student.getName());
-        stud.setCourse(student.getCourse());
-        stud.getAdres().setCity(student.getAdres().getCity());
-        stud.getAdres().setStreet(student.getAdres().getStreet());
-        stud.getAdres().setNumber(student.getAdres().getNumber());
-        stud.getEducation().setSchool(student.getEducation().getSchool());
-        stud.getEducation().setSpecialization(student.getEducation().getSpecialization());
-        stud.getEducation().setGraduationYear(student.getEducation().getGraduationYear());
-        students.put(student.getId(), student);
+        updateStudent(student, stud);
+        STUDENTS.put(student.getId(), student);
     }
 
     public void updateStudentById(int id, Student student) {
-        Student stud = students.get(id);
+        Student stud = STUDENTS.get(id);
+        updateStudent(student, stud);
+        STUDENTS.put(student.getId(), student);
+    }
+
+    private void updateStudent(Student student, Student stud) {
         stud.setName(student.getName());
         stud.setCourse(student.getCourse());
         stud.getAdres().setCity(student.getAdres().getCity());
@@ -61,10 +49,9 @@ public class StudentDAO {
         stud.getEducation().setSchool(student.getEducation().getSchool());
         stud.getEducation().setSpecialization(student.getEducation().getSpecialization());
         stud.getEducation().setGraduationYear(student.getEducation().getGraduationYear());
-        students.put(student.getId(), student);
     }
 
     public void insertStudentToDb(Student student) {
-        students.put(student.getId(), student);
+        STUDENTS.put(student.getId(), student);
     }
 }
