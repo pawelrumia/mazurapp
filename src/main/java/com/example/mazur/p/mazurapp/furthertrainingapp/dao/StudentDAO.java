@@ -15,7 +15,8 @@ public class StudentDAO {
     private static final Map<Integer, Student> STUDENTS = new HashMap<>();
 
     public University getAllStudents() {
-        return new University().withStudents(new ArrayList<>(STUDENTS.values()));
+        return new University()
+                .withStudents(new ArrayList<>(STUDENTS.values()));
     }
 
     public Student getStudentById(int id) {

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +25,7 @@ public class Student {
     @JsonProperty("education")
     private Education education;
     @JsonProperty("skills")
-    private Skills skills;
+    private List<String> skills;
 
     public Student(int id, String name, String course, Adres adres, Education education) {
         this.id = id;
@@ -32,7 +35,7 @@ public class Student {
         this.education =
                 new Education(education.getSchool(),
                         education.getSpecialization(), education.getGraduationYear());
-        this.skills = new Skills();
+        this.skills = new ArrayList<>();
     }
 
     public Student withId(int id) {
@@ -60,7 +63,7 @@ public class Student {
         return this;
     }
 
-    public Student withSkills(Skills skills) {
+    public Student withSkills(List<String> skills) {
         this.skills = skills;
         return this;
     }

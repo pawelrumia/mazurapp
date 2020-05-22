@@ -2,12 +2,8 @@ package api;
 
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Adres;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Education;
-import com.example.mazur.p.mazurapp.furthertrainingapp.student.Skills;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
 import com.google.common.collect.ImmutableList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 class Requests {
 
@@ -115,7 +111,8 @@ class Requests {
                             .withSchool("Szkola Kebaba")
                             .withSpecialization("sobota wieczor")
                             .withGraduation(1988))
-            .withSkills(new Skills(ImmutableList.of("pranie", "sprzatanie", "jedzenie")));
+
+            .withSkills(ImmutableList.of("pranie", "sprzatanie", "jedzenie"));
 
     static Student model1Lista() {
         return Student.builder()
@@ -124,7 +121,7 @@ class Requests {
                 .course("Trener")
                 .adres(new Adres("Rumia", "Nie powiem", 16))
                 .education(new Education("Najgorsza", "Trener", 2000))
-                .skills(new Skills(ImmutableList.of("pranie", "sprzatanie", "jedzenie")))
+                .skills(ImmutableList.of("pranie", "sprzatanie", "jedzenie"))
                 .build();
     }
 }

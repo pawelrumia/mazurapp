@@ -8,10 +8,7 @@ import com.example.mazur.p.mazurapp.furthertrainingapp.student.University;
 import com.example.mazur.p.mazurapp.furthertrainingapp.utils.JsonMapper;
 import com.example.mazur.p.mazurapp.furthertrainingapp.utils.PropertyReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.Method;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
@@ -19,89 +16,21 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
 
-import static api.Requests.model1;
-import static api.Requests.request1;
-import static api.Requests.request2;
-import static api.Requests.request3;
+import static api.Requests.*;
 import static api.StudentRequest.createRequest;
 import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.RequestLogger.logged;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 public class TestClass {
     private final JsonMapper jsonMapper = new JsonMapper();
     private PropertyReader PR = new PropertyReader();
-    private JsonPath jsonPath;
     private Requests request = new Requests();
     private ObjectMapper objectMapper = new ObjectMapper();
     private Client client = new Client();
-
-    @Test
-    public void getSingleEmployee() throws IOException {
-        RestAssured.baseURI = PR.readProperty("baseUri");
-        RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setBaseUri(PR.readProperty("baseUri"))
-                .setBasePath(PR.readProperty("getStudentsPath"))
-                .addPathParam("id", 45)
-                .build();
-        Response response = given().spec(logged(requestSpec))
-                .when().get().thenReturn();
-        System.out.println(response);
-        assertThat(response.getStatusCode()).as("Status code").isEqualTo(200);
-        jsonPath = new JsonPath(response.asString());
-        assertThat(jsonPath.getString("course"))
-                .isEqualTo("java");
-        assertThat(jsonPath.getString("education.kierunek"))
-                .isEqualTo("Logis5tyka");
-    }
-
-    @Test
-    public void sprawdzPierwszyRequest() throws IOException {
-        RestAssured.baseURI = PR.readProperty("baseUri");
-
-        given().contentType(JSON)
-                .when()
-                .get("/students/1")
-                .then().assertThat()
-                .body("name", equalTo("Janek"))
-                .body("education.school", equalTo("UL"))
-                .body("education.information.hobby", equalTo("chess"))
-                .statusCode(200);
-    }
-
-    @Test(groups = "raz")
-    public void getAllEmployees() throws IOException {
-        RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setBaseUri(PR.readProperty("baseUri"))
-                .setBasePath(PR.readProperty("allStudents"))
-                .build();
-        Response response = given().spec(logged(requestSpec))
-                .when().get().thenReturn();
-        System.out.println(response);
-        assertThat(response.getStatusCode()).as("Status code").isEqualTo(200);
-    }
-
-    @Test
-    public void stillTrying() throws IOException {
-        RestAssured.baseURI = PR.readProperty("baseUri");
-        RequestSpecification requestSpec = given()
-                .pathParam("id", 2);
-        Response response = requestSpec.request
-                (Method.GET, PR.readProperty("getStudentPath"));
-        ResponseBody body = response.getBody();
-        Student employeeModel = body.as(Student.class);
-
-        new AssertStudent()
-                .statusCodeIsOk(response.getStatusCode())
-                .hasIdenticalName(employeeModel.getName(), "Zioooome")
-//                .hasIdenticalRole(employeeModel.getRole(), "C")
-//                .hasIdenticalFavouriteMovie(employeeModel.getEducation()
-//                        .getInformation().getFavouriteMovie(), ("PrisonBrejk"))
-                .validateAll();
-    }
 
     @DataProvider(name = "test1")
     public Object[][] createData1() {
@@ -189,49 +118,6 @@ public class TestClass {
         client.getStudentById(PR.readProperty("baseUri"), 50);
     }
 
-    //    @AfterTest
-    @Test
-    public void deleteAll() throws IOException {
-        RestAssured.baseURI = PR.readProperty("baseUri");
-        deleteAllItems();
-    }
-
-    private void deleteAllItems() {
-        for (int i = 0; i < 500; i++) {
-            given().contentType(JSON)
-                    .when()
-                    .delete("students/" + i);
-        }
-    }
-
-    @Test(description = "Sending requests before")
-    public void sendRequests() {
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request1)
-                .post("/students")
-                .then().statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request2)
-                .post("/students")
-                .then().assertThat()
-                .statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request3)
-                .post("/students")
-                .then().statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(jsonMapper.write(request.sendRequest()))
-                .post("/students")
-                .then().statusCode(200);
-    }
-
     @Test
     public void fullModel() {
         createRequest(new Student(76, "kas", "asf",
@@ -239,28 +125,30 @@ public class TestClass {
                 new Education("asfasf", "asgjk", 1799)));
     }
 
-//    @Test
-//    public void sendBaseStudentRequest() throws IOException {
-//       client.post(PR.readProperty("baseUriForPost"),
-//               objectToJson(baseRequest));
-//    }
-//
-//    @Test
-//    public void sendBaseStudentRequestWithModification() throws IOException {
-//        client.post(PR.readProperty("baseUriForPost"),
-//                objectToJson(baseRequest));
-//    }
-//
-//    @Test
-//    public void sendBaseStudentRequestWithList() throws IOException {
-//        client.post(PR.readProperty("baseUriForPost"),
-//                objectToJson(baseRequestWithList));
-//    }
+    @Test
+    public void sendBaseStudentRequest() throws IOException {
+       client.post(PR.readProperty("baseUriForPost"),
+               jsonMapper.write(baseRequest));
+    }
 
     @Test
-    public void getStudentByIdNewWayWithList() throws IOException {
-        University university = client.getAllStudentsKopia(PR.readProperty("getAllStudents"));
+    public void sendBaseStudentRequestWithList() throws IOException {
+        client.post(PR.readProperty("baseUriForPost"),
+                jsonMapper.write(baseRequestWithList));
+    }
+
+    @Test
+    public void getStudentNewWayWithList() throws IOException {
+        University university = client.getAllStudentsNew(PR.readProperty("getAllStudents"));
         university.getStudents().forEach(student ->
                 assertThat(student.getSkills()).isNotNull());
+    }
+
+    @Test
+    public void getStudentNewWayWithId() throws IOException {
+        Student student = client.getStudentByIdNew(PR.readProperty("getStudentsWithId"), 150);
+        System.out.println(student.getSkills());
+        List<String> skills = student.getSkills();
+        skills.forEach(s -> assertThat(student.getSkills()).contains("pranie"));
     }
 }
