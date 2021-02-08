@@ -45,10 +45,10 @@ public class StudentDAO {
         stud.setCourse(student.getCourse());
         stud.getAdres().setCity(student.getAdres().getCity());
         stud.getAdres().setStreet(student.getAdres().getStreet());
-        stud.getAdres().setNumber(student.getAdres().getNumber());
+        stud.getAdres().setHomeNumber(student.getAdres().getHomeNumber());
         stud.getEducation().setSchool(student.getEducation().getSchool());
         stud.getEducation().setSpecialization(student.getEducation().getSpecialization());
-        stud.getEducation().setGraduationYear(student.getEducation().getGraduationYear());
+        stud.getEducation().setYearOfGraduation(student.getEducation().getYearOfGraduation());
     }
 
     public void insertStudentToDb(Student student) {

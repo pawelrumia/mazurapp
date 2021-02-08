@@ -4,11 +4,9 @@ import com.example.mazur.p.mazurapp.furthertrainingapp.dao.StudentDAO;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.Student;
 import com.example.mazur.p.mazurapp.furthertrainingapp.student.University;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-@Qualifier(value = "mongoData")
 public class StudentService {
 
     @Autowired
