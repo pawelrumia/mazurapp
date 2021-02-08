@@ -14,10 +14,6 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-
-import static api.Requests.request1;
-import static api.Requests.request2;
-import static api.Requests.request3;
 import static com.example.mazur.p.mazurapp.furthertrainingapp.utils.RequestLogger.logged;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -29,34 +25,6 @@ public class TestsOldWay {
     private Requests request = new Requests();
     private PropertyReader PR = new PropertyReader();
     private JsonPath jsonPath;
-
-    @Test(description = "Sending requests before")
-    public void sendRequests() {
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request1)
-                .post("/students")
-                .then().statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request2)
-                .post("/students")
-                .then().assertThat()
-                .statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(request3)
-                .post("/students")
-                .then().statusCode(200);
-
-        RestAssured.baseURI = "http://localhost:8000";
-        given().contentType(JSON)
-                .body(jsonMapper.write(request.sendRequest()))
-                .post("/students")
-                .then().statusCode(200);
-    }
 
     @Test
     public void sprawdzPierwszyRequest() throws IOException {

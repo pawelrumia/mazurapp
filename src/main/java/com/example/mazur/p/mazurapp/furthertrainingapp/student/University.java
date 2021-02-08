@@ -9,12 +9,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@With
 public class University {
     @JsonProperty("students")
     private List<Student> students;
-
-    public University withStudents(List<Student> students) {
-        this.students = students;
-        return this;
-    }
 }
